@@ -3,6 +3,7 @@
 import tweepy
 import ConfigParser
 from StockClassifier import StockClassifier
+from PriceService import PriceService
 from StreamWatchHandler import StreamHandler
 
 stocks = ['AAPL', 'GOOG', 'MSFT']
@@ -13,10 +14,11 @@ def main():
     config = ConfigParser.RawConfigParser()
     config.read('twitterLogin.ini')
     classifier = StockClassifier(stocks)
+    price_service = PriceService()
     authentication = establish_stream(config)
 
     print "Establishing stream...",
-    stream = tweepy.Stream(authentication, StreamHandler(classifier), timeout=None)
+    stream = tweepy.Stream(authentication, StreamHandler(classifier, price_service), timeout=None)
     print "Done"
     stream.filter(track=stocks)
 

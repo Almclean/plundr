@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 import tweepy
-from PriceService import PriceService
 
 
 class StreamHandler(tweepy.StreamListener):
-    def __init__(self, statusListener):
+    def __init__(self, statusListener, price_service):
         super(StreamHandler, self).__init__()
         self.statusListener = statusListener
-        self.price_service = PriceService()
+        self.price_service = price_service
 
     def on_status(self, status):
         try:
