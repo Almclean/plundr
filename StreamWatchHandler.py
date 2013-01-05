@@ -16,7 +16,7 @@ class StreamHandler(tweepy.StreamListener):
             result_set = self.statusListener.classify(txt)
             print 'Tweet consists of %s' % str(result_set)
             for stock in result_set:
-                print self.price_service.getPriceFor(stock)
+                print self.price_service.getPriceFor(stock).strip()
         except Exception as e:
             print e
 
